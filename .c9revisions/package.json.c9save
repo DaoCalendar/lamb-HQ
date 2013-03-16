@@ -1,0 +1,1 @@
+{"ts":1359004369631,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"{\n  \"name\": \"application-name\",\n  \"version\": \"0.0.1\",\n  \"private\": true,\n  \"scripts\": {\n    \"start\": \"node app\"\n  },\n  \"dependencies\": {\n    \"express\": \"3.0.6\",\n    \"jade\": \"*\"\n  }\n}"]],"start1":0,"start2":0,"length1":0,"length2":182}]],"length":182}

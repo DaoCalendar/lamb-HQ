@@ -7,7 +7,9 @@ http.createServer(function(req, res) {
     console.log("Request received.");
     res.end("Hello world from Cloud9!");
     
-}).listen(process.env.PORT, process.env.IP);
+}).listen(process.env.PORT,process.env.IP,function(){
+  console.log("Express server listening on port " +process.env.PORT);
+});
 
 // Note: when spawning a server on Cloud9 IDE, 
 // listen on the process.env.PORT and process.env.IP environment variables

@@ -1,0 +1,3 @@
+{"ts":1363400922325,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1363400938309,"patch":[[{"diffs":[[1,"<!DOC"]],"start1":0,"start2":0,"length1":0,"length2":5}]],"length":5,"saved":false}
+{"ts":1363400969340,"patch":[[{"diffs":[[0,"<!DOC"],[1,"TYPE html>\n<html>\n<head>\n<title><%= title %></title>\n<link rel='stylesheet' href='/stylesheets/style.css' />\n</head>\n<body>\n<%- body %>\n</body>\n</html>"]],"start1":0,"start2":0,"length1":5,"length2":156}]],"length":156,"saved":false}
