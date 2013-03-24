@@ -33,7 +33,7 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/stock/:number',routes.stock);
-app.get('logout',routes.logout);
+app.get('/logout',routes.logout);
 app.get('/register',routes.register_get);
 
 app.post('/login',routes.login);
