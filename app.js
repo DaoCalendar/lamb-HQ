@@ -13,7 +13,7 @@ var express = require('express')
 var app = express();
 
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', process.env.PORT || 3001);
   app.set('ip',process.env.ip);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
@@ -38,6 +38,6 @@ app.get('/register',routes.register_get);
 
 app.post('/login',routes.login);
 app.post('/register',routes.register_post);
-http.createServer(app).listen(app.get('port'),app.get('ip'),function(){
+http.createServer(app).listen(app.get('port'),app.get("ip"),function(){
   console.log("Express server listening on port " + app.get('port'));
 });

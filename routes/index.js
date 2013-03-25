@@ -10,9 +10,7 @@ exports.index = function(req, res){
 exports.stock=function(req,res)
 {
     var newStock=new Stock(req.params.number);
-    newStock.GetStockData();
-    //处理股票代码，请求webservice
-    res.render('stock',{number:req.params.number});
+    newStock.GetRenderStockData(req,res);
 }
 exports.login=function(req,res)
 {
