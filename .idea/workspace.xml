@@ -2,18 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8326e4a3-1ce6-40aa-ae53-3d477d7fb009" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/bufferhelper/MIT_License" afterPath="$PROJECT_DIR$/node_modules/bufferhelper/MIT_License" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/bufferhelper/README.md" afterPath="$PROJECT_DIR$/node_modules/bufferhelper/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/bufferhelper/.travis.yml" afterPath="$PROJECT_DIR$/node_modules/bufferhelper/.travis.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/net/Stock.js" afterPath="$PROJECT_DIR$/models/net/Stock.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layout.ejs" afterPath="$PROJECT_DIR$/views/layout.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/stock.ejs" afterPath="$PROJECT_DIR$/views/stock.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/bufferhelper/lib/bufferhelper.js" afterPath="$PROJECT_DIR$/node_modules/bufferhelper/lib/bufferhelper.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/bufferhelper/index.js" afterPath="$PROJECT_DIR$/node_modules/bufferhelper/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/bufferhelper/package.json" afterPath="$PROJECT_DIR$/node_modules/bufferhelper/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/bufferhelper/test/test.js" afterPath="$PROJECT_DIR$/node_modules/bufferhelper/test/test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="lamb-HQ.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="8326e4a3-1ce6-40aa-ae53-3d477d7fb009" time="1364173896357" ignored="false" />
-    <file path="/app.js" changelist="8326e4a3-1ce6-40aa-ae53-3d477d7fb009" time="1364140648275" ignored="false" />
+    <file path="/Dummy.txt" changelist="8326e4a3-1ce6-40aa-ae53-3d477d7fb009" time="1364204276125" ignored="false" />
+    <file path="/app.js" changelist="8326e4a3-1ce6-40aa-ae53-3d477d7fb009" time="1364212398914" ignored="false" />
     <file path="/index.js" changelist="8326e4a3-1ce6-40aa-ae53-3d477d7fb009" time="1364198989552" ignored="false" />
-    <file path="/Stock.js" changelist="8326e4a3-1ce6-40aa-ae53-3d477d7fb009" time="1364199532726" ignored="false" />
+    <file path="/Stock.js" changelist="8326e4a3-1ce6-40aa-ae53-3d477d7fb009" time="1364218182740" ignored="false" />
     <file path="/stock.ejs" changelist="8326e4a3-1ce6-40aa-ae53-3d477d7fb009" time="1364200232263" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +42,7 @@
       <file leaf-file-name="Stock.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/net/Stock.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="19" selection-start="2085" selection-end="2086" vertical-scroll-proportion="0.8958904">
+            <state line="10" column="40" selection-start="394" selection-end="394" vertical-scroll-proportion="0.6501901">
               <folding />
             </state>
           </provider>
@@ -46,25 +51,7 @@
       <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="30" selection-start="756" selection-end="756" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="stock.ejs" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/stock.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="27" selection-start="26" selection-end="26" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="layout.ejs" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/layout.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="70" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0">
+            <state line="41" column="71" selection-start="1152" selection-end="1152" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -97,10 +84,10 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/views/stock.ejs" />
         <option value="$PROJECT_DIR$/views/layout.ejs" />
+        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/models/net/Stock.js" />
       </list>
     </option>
@@ -137,6 +124,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -193,6 +181,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lamb-HQ" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lamb-HQ" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -217,18 +219,17 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager" selected="Node.js.Unnamed">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
@@ -304,10 +305,10 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286219" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32685512" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24235645" sideWeight="0.69787985" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30212015" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24235645" sideWeight="0.51766783" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48233217" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291367" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -393,26 +394,31 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/models/net/Stock.js</url>
-          <line>68</line>
+          <line>73</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/models/net/Stock.js</url>
-          <line>58</line>
+          <line>59</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/models/net/Stock.js</url>
-          <line>82</line>
+          <line>87</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/models/net/Stock.js</url>
-          <line>74</line>
+          <line>79</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/models/net/Stock.js</url>
+          <line>65</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="14" />
+      <option name="time" value="15" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -425,23 +431,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/middleware.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="656" selection-end="656" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="31" column="0" selection-start="656" selection-end="656" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/node_modules/connect/lib/middleware/query.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="0" selection-start="843" selection-end="843" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="44" column="0" selection-start="843" selection-end="843" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/node_modules/connect/lib/connect.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="883" selection-end="883" vertical-scroll-proportion="0.14179105">
-          <folding />
-        </state>
+        <state line="65" column="0" selection-start="883" selection-end="883" vertical-scroll-proportion="0.14179105" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
@@ -453,9 +453,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/layout.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/node_modules/connect/lib/middleware/methodOverride.js">
@@ -467,9 +465,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/node_modules/connect/lib/middleware/multipart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="0" selection-start="3027" selection-end="3027" vertical-scroll-proportion="0.5529412">
-          <folding />
-        </state>
+        <state line="131" column="0" selection-start="3027" selection-end="3027" vertical-scroll-proportion="0.5529412" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/node_modules/connect/lib/proto.js">
@@ -488,9 +484,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/node_modules/connect/lib/middleware/bodyParser.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="1456" selection-end="1456" vertical-scroll-proportion="1.0">
-          <folding />
-        </state>
+        <state line="57" column="0" selection-start="1456" selection-end="1456" vertical-scroll-proportion="1.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/stock.ejs">
@@ -502,14 +496,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/layout.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="70" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="4" column="70" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="30" selection-start="756" selection-end="756" vertical-scroll-proportion="0.0">
+        <state line="41" column="71" selection-start="1152" selection-end="1152" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -523,7 +515,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/net/Stock.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="19" selection-start="2085" selection-end="2086" vertical-scroll-proportion="0.8958904">
+        <state line="10" column="40" selection-start="394" selection-end="394" vertical-scroll-proportion="0.6501901">
           <folding />
         </state>
       </provider>

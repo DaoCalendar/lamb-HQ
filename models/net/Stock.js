@@ -1,5 +1,5 @@
 var http=require("http");
-
+var iconv=require("iconv-lite");
 function Stock(stock_number)
 {
     this.number_=stock_number;
@@ -56,16 +56,21 @@ Stock.prototype.IsShangHaiStock=function(stock_number){
 Stock.prototype.GetRenderStockData=function(globalReq,globalRes){
     var options={host:this.source_host_,path:this.source_host_path_};
     var Stock=this;  //this还是调用Stock一个对象
+    var stock_data;
     var req=http.get(options,function(res){
         console.log("Status:"+res.statusCode);
-        console.log("Heads;"+res.headers);
-        res.setEncoding("gb2312");
+        for(var prot in res.headers)
+        {
+            console.log(res.headers[prot]);
+        }
+        res.setEncoding("binary");
         res.on('data',function(data){       //先得到所有的stock_data，再处理stock_data，得有一个变量保存
-
-            Stock.stock_data_+=data;
+            stock_data+=data;
             console.log(data);
         });
         res.on('end',function(){
+            var buf=new Buffer(stock_data,'binary');
+            Stock.stock_data_=iconv.decode(buf,'GBK');
             Stock.SliceAssignStockData();
             globalRes.render("stock",{stock:Stock});
             console.log("accepted all data:",Stock.stock_data_);
