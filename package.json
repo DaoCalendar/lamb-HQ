@@ -9,6 +9,8 @@
     "express": "3.0.6",
     "jade": "*",
     "ejs":">=0.0.1",
-    "express-partials":"*"
+    "express-partials":"*",
+     "mongodb":">=0.9.9",
+      "connect-mongo":">=0.1.7"
     }
 }

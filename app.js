@@ -9,7 +9,9 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
-
+var settings=require("./settings.js");
+var connect=require("./node_modules/express/node_modules/connect");
+var mongoStorger=require("connect-mongo")(connect);
 var app = express();
 
 app.configure(function(){
@@ -22,6 +24,14 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(express.cookieParser());
+  app.use(express.session({
+      secret:settings.cookieSecret,
+      store:new mongoStorger({
+       db:settings.db
+      })
+  })
+  );
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });

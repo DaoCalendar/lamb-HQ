@@ -14,7 +14,14 @@ exports.stock=function(req,res)
 }
 exports.login=function(req,res)
 {
-    
+       var newUser=new User();
+       if(User.Verify())
+       {
+           res.render('index',{username:User.name});
+       }else
+       {
+           res.render('index',{});
+       }
 }
 exports.logout=function(req,res)
 {
