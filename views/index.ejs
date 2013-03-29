@@ -1,53 +1,60 @@
-<p class="lead"><small><%=title%></small></p>
-<div class="row">
-    <div class="span3"><input type="text" placeholder="用户名/邮箱"></div>
-    <div class="span2"><input type="password" placeholder="密码"></div>
-    <div class="span1"><button class="btn btn-primary" type="submit"><a href="/login">登陆</a></button></div>
-    <div class="span1"><button class="btn btn-success" type="button">注册</button></div>
+
+<div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                <div class="well tabbable">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#1" data-toggle="tab">最近访问</a></li>
+                    <li><a href="#2" data-toggle="tab">自选股</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="1">
+                      <p>最近访问股</p>
+                    </div>
+                    <div class="tab-pane" id="2">
+                      <p>自选股</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="span10">
+                <div class="hero-unit">
+                   <h1>新闻头条</h1>
+                  <p>
+                     <ul class="unstyled">
+                        <li><a href="#">a公司有问题</a></li>
+                        <li><a href="#">b公司有很大问题</a></li>
+                     </ul>
+                  </p>
+                </div>
+                <table class="table">
+                    <thead >
+                        <tr class="alert-success">
+                            <th>代码</th>
+                            <th>股票名称</th>
+                            <th>股价</th>
+                            <th>成交量</th>
+                            <th><a href="#"> >> </a> </th>
+
+                        </tr>
+                        <tr>
+                            <td>600259</td>
+                            <td>广晟有色</td>
+                            <td>50.61</td>
+                            <td>1100</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <hr>
+        <footer>
+             <p class="muted">&copy;Create By Zhangshuiyong</p>
+        </footer>
 </div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-        <th>代码</th>
-        <th>股票名称</th>
-        <th>股价</th>
-        <th>成交量</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
 
 
-<!--
-<div class="usr">
-    <form>
-        <input type="text" name="username" value="用户名"/>
-        <input type="password" name="password" value="密码"/>
-        <input type="submit" />
-    </form>
-</div>
-<div class="info">
-    <image src="/images/logo.jpg" />
-    <form>
-        <input type="text" name="searchStock"/>
-        <input type="submit" />
-    <form>
-</div>
-<div class="stockPanel">
-    <table>
-        <tr>
-            <th>代码</th>
-            <th>股票名称</th>
-        </tr>
-        <tr>
-            <td>600259</td>
-            <td>广晟有色</td>
-        </tr>
-    </table>
-</div>
-<div class="foot">
-    <p>create by zhangshuiyong</p>
-</div>
--->
