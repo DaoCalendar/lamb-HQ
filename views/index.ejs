@@ -1,12 +1,27 @@
  <script>
-          $(window).load(function(){
-             $('#dataTable').dataTable({
-                 'sScrollX':"100%",
-                 'sScrollXInner':"110%",
-                 'bScrollCollapse':true,
-             });
+          /* Table initialisation */
+          $(document).ready(function() {
+              $('#stockdatatable').dataTable( {
+                  	"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
 
-          });
+                  "sPaginationType": "bootstrap",
+                  "oLanguage": {
+                      'sSearch':'搜索:',
+                      "sLengthMenu": "展示 _MENU_ 股票/每页",
+                      'sZeroRecords':"找不到所要的股票,抱歉！",
+                      'sInfo':"目前是 _START_ 到 _END_ 共 _TOTAL_ 支股票",
+                      'sEmptyInfo':"目前是 0 到 0 共 0 支股票",
+                      'sInfoFiltered':"从 _MAX_ 支股票找到",
+                      'oPaginate':{'sFirst':"首页",'sNext':"下一页",'sPrevious':"上一页",'sLast':"尾页"},
+
+                  },
+                  "sScrollX": "100%",
+                  "sScrollXInner": "110%",
+                  "bScrollCollapse": true,
+                   'iDisplayLength':2,
+                   'bJQueryUI':true,
+              } );
+          } );
  </script>
  <div class="container-fluid">
         <div class="row-fluid">
