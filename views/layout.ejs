@@ -22,9 +22,9 @@
 <body>
        <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
-               <div class="container">
-                    <div class="row">
-                        <div class="span12">
+               <div class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="offset1 span4">
                             <a class="brand" href="#">
                                 <image src="../public/images/default.jpg"></image>
                                 <strong>小羊司令部</strong>
@@ -34,6 +34,7 @@
                                 <li><a>关于</a></li>
                                 <li><a>联系我们</a></li>
                             </ul>
+                        </div>
 
                             <%if(!user){ %>
                             <form class="navbar-form pull-right" action="/login" method="post">
@@ -48,13 +49,13 @@
                                     <a href="/logout" class="btn btn-primary">登出</a>
                                 </form>
                             <%}%>
-                        </div>
-                    </div>
-                    <div class="row" style="padding-top:30px">
 
                     </div>
-                    <div class="row">
-                        <div class="span3">
+                    <div class="row-fluid" style="padding-top:30px">
+
+                    </div>
+                    <div class="row-fluid">
+                        <div class="offset1 span3">
                             <form class="form-search pull-left">
                                 <div class="input-append">
                                    <input  type="text" class="search-query" placeholder="Search">
@@ -62,7 +63,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="span6 offset3">
+                        <div class="offset7">
                             <blockquote>
                                 <p>别人恐惧的时候贪婪,别人贪婪的时候恐惧.</p>
                                 <small>沃伦巴菲特</small>

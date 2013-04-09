@@ -8,7 +8,7 @@ function Stock(stock_number)
     this.source_host_path_="/list="+this.num_prefix_+this.number_;
     this.name_=undefined;
     this.today_first_price_=undefined;
-    this.today_end_price_=undefined;
+    this.yday_end_price_=undefined;
     this.now_price_=undefined;
     this.today_hightest_price_=undefined;
     this.today_lowest_price_=undefined;
@@ -72,7 +72,7 @@ Stock.prototype.GetRenderStockData=function(globalReq,globalRes){
             var buf=new Buffer(stock_data,'binary');
             Stock.stock_data_=iconv.decode(buf,'GBK');
             Stock.SliceAssignStockData();
-            globalRes.render("stock",{stock:Stock});
+            globalRes.render("stock",{stock:Stock,layout:false});
             console.log("accepted all data:",Stock.stock_data_);
         });
 	});
@@ -87,7 +87,7 @@ Stock.prototype.SliceAssignStockData=function(){
         var stock_data_array=stock_data_part.split(",");
         this.name_=stock_data_array[0];
         this.today_first_price_=stock_data_array[1];
-        this.today_end_price_=stock_data_array[2];
+        this.yday_end_price_=stock_data_array[2];
         this.now_price_=stock_data_array[3];
         this.today_hightest_price_=stock_data_array[4];
         this.today_lowest_price_=stock_data_array[5];

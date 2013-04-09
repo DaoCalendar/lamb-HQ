@@ -1,29 +1,4 @@
- <script>
-          /* Table initialisation */
-          $(document).ready(function() {
-              $('#stockdatatable').dataTable( {
-                  	"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-
-                  "sPaginationType": "bootstrap",
-                  "oLanguage": {
-                      'sSearch':'搜索:',
-                      "sLengthMenu": "展示 _MENU_ 股票/每页",
-                      'sZeroRecords':"找不到所要的股票,抱歉！",
-                      'sInfo':"目前是 _START_ 到 _END_ 共 _TOTAL_ 支股票",
-                      'sEmptyInfo':"目前是 0 到 0 共 0 支股票",
-                      'sInfoFiltered':"从 _MAX_ 支股票找到",
-                      'oPaginate':{'sFirst':"首页",'sNext':"下一页",'sPrevious':"上一页",'sLast':"尾页"},
-
-                  },
-                  "sScrollX": "100%",
-                  "sScrollXInner": "110%",
-                  "bScrollCollapse": true,
-                   'iDisplayLength':2,
-                   'bJQueryUI':true,
-              } );
-          } );
- </script>
- <div class="container-fluid">
+<div class="container-fluid">
         <div class="row-fluid">
             <div class="span2">
                 <div class="well tabbable">
@@ -57,69 +32,40 @@
                             <th>代码</th>
                             <th>股票名称</th>
                             <th>涨幅%</th>
-                            <th>股价</th>
+                            <th>现价</th>
                             <th>涨跌价</th>
+                            <th>买入价</th>
+                            <th>卖出价</th>
                             <th>成交量</th>
-                            <th>最高价</th>
+                            <th>成交金额</th>
+                            <th>今开</th>
+                            <th>昨收</th>
+                            <th>最高</th>
+                            <th>最低</th>
+                            <th>买量一</th>
+                            <th>卖量一</th>
+                            <th>买价一</th>
+                            <th>卖价一</th>
+                            <th>买量二</th>
+                            <th>卖量二</th>
+                            <th>买价二</th>
+                            <th>卖价二</th>
+                            <th>买量三</th>
+                            <th>卖量三</th>
+                            <th>买价三</th>
+                            <th>卖价三</th>
+                            <th>买量四</th>
+                            <th>卖量四</th>
+                            <th>买价四</th>
+                            <th>卖价四</th>
+                            <th>买量五</th>
+                            <th>卖量五</th>
+                            <th>买价五</th>
+                            <th>卖价五</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>600259</td>
-                            <td>广晟有色</td>
-                            <td>-1</td>
-                            <td>50.61</td>
-                            <td>-0.506</td>
-                            <td>1100</td>
-                            <td>C</td>
-                        </tr>
 
-                        <tr>
-                            <td>600111</td>
-                            <td>包钢稀土</td>
-                            <td>-4</td>
-                            <td>33.43</td>
-                            <td>-1.2</td>
-                            <td>210</td>
-                            <td>D</td>
-                         </tr>
-
-                        <tr>
-                                                    <td>600121</td>
-                                                    <td>包钢股份</td>
-                                                    <td>-7</td>
-                                                    <td>3.43</td>
-                                                    <td>-0.2</td>
-                                                    <td>41000</td>
-                                                    <td>Gc</td>
-                                                 </tr>
-                        <tr>
-                                                    <td>600243</td>
-                                                    <td>佛山照明</td>
-                                                    <td>1</td>
-                                                    <td>36.43</td>
-                                                    <td>0.36</td>
-                                                    <td>50</td>
-                                                    <td>H</td>
-                                                 </tr>
-                        <tr>
-                                                    <td>600699</td>
-                                                    <td>联创科技</td>
-                                                    <td>4.02</td>
-                                                    <td>55.61</td>
-                                                    <td>2.2</td>
-                                                    <td>600</td>
-                                                    <td>B</td>
-                                                </tr>
-                         <tr>
-                                                     <td>600250</td>
-                                                     <td>振华重工</td>
-                                                     <td>4.01</td>
-                                                     <td>3.43</td>
-                                                     <td>0.12</td>
-                                                     <td>710</td>
-                                                     <td>Gb</td>
-                                                 </tr>
                     </tbody>
                 </table>
             </div>
