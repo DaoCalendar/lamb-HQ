@@ -1,5 +1,9 @@
 module.exports={
     cookieSecret:'zhangshuiyong',
-    db:'lambdb',
-    host:'localhost'
+    dbName:'lambdb',
+    dbHost:'localhost',
+    stockConfigXml:__dirname+"\\"+'stock.xml',
+    stockJsonFile:__dirname+"\\public\\files\\"+'stock.json',
+    stockDataHost:"hq.sinajs.cn",
+    stockDataHostPathPart:"/list="
 }

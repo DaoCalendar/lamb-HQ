@@ -7,7 +7,7 @@ function User(newUser){
 };
 
 User.prototype.Save=function(callback){
-    //要有一个对象文档
+    //要有一个对象文档,单纯的数据文档
     var user={
         name:this.name,
         password:this.password

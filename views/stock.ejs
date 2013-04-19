@@ -1,42 +1,49 @@
 {
 "aaData":[
-            ["<%=stock.number_%>",
-            "<%=stock.name_%>",
-            "<%=((stock.now_price_-stock.yday_end_price_)/stock.today_first_price_*100).toFixed(2)%>",
-            "<%=stock.now_price_%>",
-            "<%=(stock.now_price_-stock.yday_end_price_).toFixed(2)%>",
-            "<%=stock.buy_price_%>",
-            "<%=stock.sole_price_%>",
-            "<%=stock.bargain_amount_%>",
-            "<%=stock.bargain_value_%>",
-            "<%=stock.today_first_price_%>",
-            "<%=stock.yday_end_price_%>",
-            "<%=stock.today_hightest_price_%>",
-            "<%=stock.today_lowest_price_%>",
+          <%for(var i=0;i<stocks.length;++i){%>
+            ["<%=stocks[i].number_%>",
+            "<%=stocks[i].cname_%>",
+            "<%=stocks[i].pinyin_%>",
+            "<%=((stocks[i].now_price_-stocks[i].yday_end_price_)/stocks[i].today_first_price_*100).toFixed(2)%>",
+            "<%=stocks[i].now_price_%>",
+            "<%=(stocks[i].now_price_-stocks[i].yday_end_price_).toFixed(2)%>",
+            "<%=stocks[i].buy_price_%>",
+            "<%=stocks[i].sole_price_%>",
+            "<%=stocks[i].bargain_amount_%>",
+            "<%=stocks[i].bargain_value_%>",
+            "<%=stocks[i].today_first_price_%>",
+            "<%=stocks[i].yday_end_price_%>",
+            "<%=stocks[i].today_hightest_price_%>",
+            "<%=stocks[i].today_lowest_price_%>",
 
-            "<%=stock.buy_one_amount_%>",
-            "<%=stock.sole_one_amount_%>",
-            "<%=stock.buy_one_price_%>",
-            "<%=stock.sole_one_price_%>",
+            "<%=stocks[i].buy_one_amount_%>",
+            "<%=stocks[i].sole_one_amount_%>",
+            "<%=stocks[i].buy_one_price_%>",
+            "<%=stocks[i].sole_one_price_%>",
 
-            "<%=stock.buy_two_amount_%>",
-            "<%=stock.sole_two_amount_%>",
-            "<%=stock.buy_two_price_%>",
-            "<%=stock.sole_two_price_%>",
+            "<%=stocks[i].buy_two_amount_%>",
+            "<%=stocks[i].sole_two_amount_%>",
+            "<%=stocks[i].buy_two_price_%>",
+            "<%=stocks[i].sole_two_price_%>",
 
-            "<%=stock.buy_three_amount_%>",
-            "<%=stock.sole_three_amount_%>",
-            "<%=stock.buy_three_price_%>",
-            "<%=stock.sole_three_price_%>",
+            "<%=stocks[i].buy_three_amount_%>",
+            "<%=stocks[i].sole_three_amount_%>",
+            "<%=stocks[i].buy_three_price_%>",
+            "<%=stocks[i].sole_three_price_%>",
 
-            "<%=stock.buy_four_amount_%>",
-            "<%=stock.sole_four_amount_%>",
-            "<%=stock.buy_four_price_%>",
-            "<%=stock.sole_four_price_%>",
+            "<%=stocks[i].buy_four_amount_%>",
+            "<%=stocks[i].sole_four_amount_%>",
+            "<%=stocks[i].buy_four_price_%>",
+            "<%=stocks[i].sole_four_price_%>",
 
-            "<%=stock.buy_five_amount_%>",
-            "<%=stock.sole_five_amount_%>",
-            "<%=stock.buy_five_price_%>",
-            "<%=stock.sole_five_price_%>"
+            "<%=stocks[i].buy_five_amount_%>",
+            "<%=stocks[i].sole_five_amount_%>",
+            "<%=stocks[i].buy_five_price_%>",
+            "<%=stocks[i].sole_five_price_%>"
             ]
-          ]}
+            <%if(i<stocks.length-1){%>
+                ,
+            <%}%>
+          <%}%>
+
+]}
