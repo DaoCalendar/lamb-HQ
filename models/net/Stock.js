@@ -18,7 +18,7 @@ function Stock(stock_number,stock_pinyin,stock_cname)
     this.sole_price_=undefined;
     this.bargain_amount_=undefined;
     this.bargain_value_=undefined;
-    /*
+
     //buy_one to buy_five
     this.buy_one_amount_=undefined;
     this.buy_one_price_=undefined;
@@ -45,7 +45,7 @@ function Stock(stock_number,stock_pinyin,stock_cname)
     
     this.date_=undefined;
     this.time_=undefined;
-    */
+
 }
 Stock.prototype.IsShangHaiStock=function(stock_number){
 	var stockFirstChar=stock_number.charAt(0);
@@ -62,18 +62,19 @@ Stock.prototype.SliceAssignStockData=function(dataString){
         var stock_data_part=dataString.substring(beg,end);
         var stock_data_array=stock_data_part.split(",");
 
-        this.today_first_price_=stock_data_array[1];
-        this.yday_end_price_=stock_data_array[2];
-        this.now_price_=stock_data_array[3];
-        this.today_hightest_price_=stock_data_array[4];
-        this.today_lowest_price_=stock_data_array[5];
-        this.buy_price_=stock_data_array[6];
-        this.sole_price_=stock_data_array[7];
-        this.bargain_amount_=(stock_data_array[8]/100).toFixed(2);
-        this.bargain_value_=(stock_data_array[9]/10000).toFixed(2);
-        this.rise_rate_=((this.now_price_-this.yday_end_price_)/this.yday_end_price_*100).toFixed(2);
-        this.rise_value_=(this.now_price_-this.yday_end_price_).toFixed(2);
-        /*
+        this.today_first_price_=(stock_data_array[1]==undefined?0.00:stock_data_array[1]);
+        this.yday_end_price_=(stock_data_array[2]==undefined?-1:stock_data_array[2]);  //做“--”展示
+        this.now_price_=(stock_data_array[3]==undefined?-1:stock_data_array[3]);   //做“--”展示
+        this.today_hightest_price_=(stock_data_array[4]===undefined?0.00:stock_data_array[4]);
+        this.today_lowest_price_=(stock_data_array[5]===undefined?0.00:stock_data_array[5]);
+        this.buy_price_=(stock_data_array[6]===undefined?0.00:stock_data_array[6]);
+        this.sole_price_=(stock_data_array[7]===undefined?0.00:stock_data_array[7]);
+        this.bargain_amount_=(stock_data_array[8]===undefined?0.00:(stock_data_array[8]/100).toFixed(2));
+        this.bargain_value_=(stock_data_array[9]===undefined?0.00:(stock_data_array[9]/10000).toFixed(2));
+        //现价等于0或-1，就是停牌或终止上市
+        this.rise_rate_=(this.now_price_==-1||this.now_price_==0.00)?0.00:((this.now_price_-this.yday_end_price_)/this.yday_end_price_*100).toFixed(2);
+        this.rise_value_=(this.now_price_==-1||this.now_price_==0.00)?0.00:(this.now_price_-this.yday_end_price_).toFixed(2);
+
         //buy_one to buy_five
         this.buy_one_amount_=stock_data_array[10];
         this.buy_one_price_=stock_data_array[11];
@@ -99,7 +100,7 @@ Stock.prototype.SliceAssignStockData=function(dataString){
         this.sole_five_price_=stock_data_array[29];
         this.date_=stock_data_array[30];
         this.time_=stock_data_array[31];
-        */
+
 };
 
 module.exports=Stock;

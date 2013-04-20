@@ -157,8 +157,8 @@ $(document).ready(function() {
         'sAjaxSource':"/stock/dataTableServer",
 
         "aoColumnDefs":[
-            {"mRender":function(data,type,rowData){return "<a href='#' style='font-size: 15px;'><strong>"+data+"</strong></a>";},"aTargets":[0]},
-            {"bSortable":false,"mRender":function(data,type,rowData){return "<a href='#' style='font-size: 15px;'><strong>"+data+"</strong></a>";},"aTargets":[1]}, //名称第2行不能排序
+            {"mRender":function(data,type,rowData){return "<a href='/stock/"+data+"'style='font-size: 15px;'><strong>"+data+"</strong></a>";},"aTargets":[0]},
+            {"bSortable":false,"mRender":function(data,type,rowData){return "<a href='/stock/"+rowData[0]+"' style='font-size: 15px;'><strong>"+data+"</strong></a>";},"aTargets":[1]}, //名称第2行不能排序
             {
                 "mRender":function(data,type,rowData){
                     if(rowData[2]>0)
@@ -224,27 +224,27 @@ $(document).ready(function() {
                 stockArray.forEach(function(stock){
                     var row=oTable.$("tr").children("td:contains("+stock[0]+")").parent();
                     //涨幅
-                    row.children('td').eq(2).text(stock[1]);
+                    row.children('td').eq(2).$('strong').text(stock[1]);
                     //现价
-                    row.children('td').eq(3).text(stock[2]);
+                    row.children('td').eq(3).$('strong').text(stock[2]);
                     //涨跌
-                    row.children('td').eq(4).text(stock[3]);
+                    row.children('td').eq(4).$('strong').text(stock[3]);
                     //买入
-                    row.children('td').eq(5).text(stock[4]);
+                    row.children('td').eq(5).$('strong').text(stock[4]);
                    //卖出
-                    row.children('td').eq(6).text(stock[5]);
+                    row.children('td').eq(6).$('strong').text(stock[5]);
                    //成交量/手
-                    row.children('td').eq(7).text(stock[6]);
+                    row.children('td').eq(7).$('strong').text(stock[6]);
                    //成交额/万
-                    row.children('td').eq(8).text(stock[7]);
+                    row.children('td').eq(8).$('strong').text(stock[7]);
                    //今开
-                    row.children('td').eq(9).text(stock[8]);
+                    row.children('td').eq(9).$('strong').text(stock[8]);
                    //昨收
-                    row.children('td').eq(10).text(stock[9]);
+                    row.children('td').eq(10).$('strong').text(stock[9]);
                    //最高
-                    row.children('td').eq(11).text(stock[10]);
+                    row.children('td').eq(11).$('strong').text(stock[10]);
                    //最低
-                    row.children('td').eq(12).text(stock[11]);
+                    row.children('td').eq(12).$('strong').text(stock[11]);
 
                 });
 
@@ -253,6 +253,7 @@ $(document).ready(function() {
                 //$('#refresh').removeClass('alert-success').addClass('alert-error').text('刷新股票数据出错,请重刷.');
             }
         });
+
      }
     },5000);
 } );

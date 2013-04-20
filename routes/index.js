@@ -144,60 +144,24 @@ var stockRefresh=function(req,res){
             //全部数据拿到
             var allStockArrayString='{"currentRows":[';
             for(var k=0;k<stockArray.length;++k){
-                if(stockArray[k].now_price_==undefined)
-                {
-                    //中止上市的股票（什么都获取不到）
-                    var stockArrayString='['+
-                        '"'+stockArray[k].number_+'",'+
-                        '0.00,'+
-                        '"--",'+
-                        '0.00,'+
-                        '0.00,'+
-                        '0.00,'+
-                        '0.00,'+
-                        '0.00,'+
-                        '0.00,'+
-                        '"--",'+
-                        '0.00,'+
-                        '0.00'+
-                        ']';
-                }
-                else if(stockArray[k].now_price_==0)
-                {
-                    //停牌的股票（名字和现价，其他都为0
-                    var stockArrayString='['+
-                        '"'+stockArray[k].number_+'",'+
-                        '0.00,'+
-                        '"--",'+
-                        '0.00,'+
-                        '0.00,'+
-                        '0.00,'+
-                        '0.00,'+
-                        '0.00,'+
-                        '0.00,'+
-                        stockArray[k].yday_end_price_+','+
-                        '0.00,'+
-                        '0.00'+
-                        ']';
-                }else{
-                    //正常情况的股票
+
                     var stockArrayString='['+
                         '"'+stockArray[k].number_+'",'+
                         //ajax刷新的时候,不用更新代码和名称，但要传送number做前端识别
                         //'"'+stockArray[k].cname_+'",'+
                         stockArray[k].rise_rate_+','+
-                        stockArray[k].now_price_+','+
+                        ((stockArray[k].now_price_==-1||stockArray[k].now_price_==0.00)?'"--"':stockArray[k].now_price_)+','+
                         stockArray[k].rise_value_+','+
                         stockArray[k].buy_price_+','+
                         stockArray[k].sole_price_+','+
                         stockArray[k].bargain_amount_+','+
                         stockArray[k].bargain_value_+','+
                         stockArray[k].today_first_price_+','+
-                        stockArray[k].yday_end_price_+','+
+                        (stockArray[k].yday_end_price_==-1?'"--"':stockArray[k].yday_end_price_)+','+
                         stockArray[k].today_hightest_price_+','+
                         stockArray[k].today_lowest_price_+
                         ']';
-                }
+
 
                 allStockArrayString+=stockArrayString+',';
             }
@@ -392,42 +356,6 @@ function GetChangingStockData(stockDataPath,stockArray){
             {
                 stockArray[k].SliceAssignStockData(stockDataArray[k]);
             }
-            //全部数据拿到,得到一个有100个对象的stockArray对象数组
-            //三种股票数据，再处理一下
-            for(var k=0;k<stockArray.length;++k){
-                //1.正常开盘的股票
-                if(stockArray[k].now_price_==undefined)
-                {
-                    //2.中止上市的股票（什么都获取不到）
-                    stockArray[k].today_first_price_=0.00;
-                    stockArray[k].yday_end_price_=-1;
-                    stockArray[k].now_price_=-1;
-                    stockArray[k].today_hightest_price_=0.00;
-                    stockArray[k].today_lowest_price_=0.00;
-                    stockArray[k].buy_price_=0.00;
-                    stockArray[k].sole_price_=0.00;
-                    stockArray[k].bargain_amount_=0.00;
-                    stockArray[k].bargain_value_=0.00;
-                    stockArray[k].rise_rate_=0.00;
-                    stockArray[k].rise_value_=0.00;
-                }
-
-                if(stockArray[k].today_first_price_==0.00)
-                {
-                    //3.停牌的股票（名字和昨收，其他都为0)
-                    stockArray[k].today_first_price_=0.00;
-                    //stockArray[k].yday_end_price_=-1;
-                    stockArray[k].now_price_=-1;
-                    stockArray[k].today_hightest_price_=0.00;
-                    stockArray[k].today_lowest_price_=0.00;
-                    stockArray[k].buy_price_=0.00;
-                    stockArray[k].sole_price_=0.00;
-                    stockArray[k].bargain_amount_=0.00;
-                    stockArray[k].bargain_value_=0.00;
-                    stockArray[k].rise_rate_=0.00;
-                    stockArray[k].rise_value_=0.00;
-                }
-            }
             ep.emit('got_stock100',stockArray);
         });
 
@@ -439,6 +367,44 @@ function GetChangingStockData(stockDataPath,stockArray){
 
 };
 
+var dispalySingleStockPage=function(req,res){
+    var stockNumber=req.params.number;
+    var DbStock=mongoose.model('Stock');
+    DbStock.findOne({number:stockNumber},function(err,dbStock){
+        var newStock=new NetStock(stockNumber,dbStock.pinyin,dbStock.cname);
+        var stockDataPath=settings.stockDataHostPathPart;
+        stockDataPath+=newStock.num_prefix_+newStock.number_;
+        var  stock_data;
+        var options={host:settings.stockDataHost,path:stockDataPath};
+        options.Connection="keep-alive";
+        var stockDataReq= http.get(options,function(stockDataRes){
+            console.log("Status:"+stockDataRes.statusCode);
+            stockDataRes.setEncoding("binary");
+            stockDataRes.on('data',function(data){       //先得到所有的stock_data，再处理stock_data，得有一个变量保存
+                stock_data+=data;
+                console.log(data);
+            });
+
+            //1个股票数据拿到
+            stockDataRes.on('end',function(){
+                var buf=new Buffer(stock_data,'binary');
+                var stock_data_=iconv.decode(buf,'GBK');
+                newStock.SliceAssignStockData(stock_data_);
+                var gifHost=settings.stockGifHost;
+                var gifExt=".gif";
+                var minGifUrl="http://"+gifHost+settings.stockMinGifHostPathPart+newStock.num_prefix_+newStock.number_+gifExt;
+                var dailyGifUrl="http://"+gifHost+settings.stockDailyGifHostPathPart+newStock.num_prefix_+newStock.number_+gifExt;;
+                var weeklyUrl="http://"+gifHost+settings.stockWeeklyGifHostPathPart+newStock.num_prefix_+newStock.number_+gifExt;;
+                var monthlyUrl="http://"+gifHost+settings.stockMonthlyGifHostPathPart+newStock.num_prefix_+newStock.number_+gifExt;;
+                var stockGifUrl_={'Min':minGifUrl,'Daily':dailyGifUrl,'Weekly':weeklyUrl,'Monthly':monthlyUrl};
+
+                res.render("singleStock",{stock:newStock,stockGifUrl:stockGifUrl_});
+            });
+        });
+
+    });
+
+};
 
 module.exports=function(app){
     app.get('/', index);
@@ -446,6 +412,7 @@ module.exports=function(app){
     app.get('/logout',logout);
     app.get('/register',register_get);
     app.get('/stock/dataTableServer',stockDataTableServer);
+    app.get('/stock/:number',dispalySingleStockPage);
 
     app.post('/login',login);
     app.post('/register',register_post);

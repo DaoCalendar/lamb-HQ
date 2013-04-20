@@ -1,0 +1,102 @@
+
+<div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                <div class="well tabbable">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#1" data-toggle="tab">最近访问</a></li>
+                    <li><a href="#2" data-toggle="tab">自选股</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="1">
+                      <p>最近访问股</p>
+                    </div>
+                    <div class="tab-pane" id="2">
+                      <p>自选股</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="span10">
+                          <div class="row">
+                                <div class="span2">
+                                     <h3><%=stock.cname_%></h3><h6><%=stock.number_%></h6>
+                                </div>
+                                <div class="offset4 span6">
+                                    <button class="primary-btn"><i class="icon-plus"></i>加入自选</button>
+                                </div>
+                          <div>
+                          <div class="row">
+                                <div class="span2">
+                                    <h4><%=stock.now_price_%> <span></h4><%=stock.rise_rate_%>%</span>
+                                </div>
+                                <div class="span10">
+                                    <div class="row">
+                                        <div class="span6">
+                                            <span>今开：<%=stock.now_price_%></span>
+                                        </div>
+                                        <div class="span6">
+                                            <span>成交量：<%=stock.bargain_amount_%></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                         <div class="span6">
+                                              <span>昨收：<%=stock.yday_end_price_%></span>
+                                         </div>
+                                         <div class="span6">
+                                              <span>成交额：<%=stock.bargain_value_%></span>
+                                         </div>
+                                    </div>
+                                    <div class="row">
+                                         <div class="span6">
+                                             <span>最高：<%=stock.today_hightest_price_%></span>
+                                         </div>
+                                         <div class="span6">
+                                             <span></span>
+                                         </div>
+                                    </div>
+
+                                    <div class="row">
+                                         <div class="span6">
+                                             <span>最低：<%=stock.today_lowest_price_%></span>
+                                         </div>
+                                         <div class="span6">
+                                             <span></span>
+                                         </div>
+                                    </div>
+                                </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="span12">
+                                      <div class="tabbable">
+                                        <ul class="nav nav-tabs">
+                                          <li class="active"><a href="#min" data-toggle="tab">分钟</a></li>
+                                          <li><a href="#daily" data-toggle="tab">日K</a></li>
+                                          <li><a href="#weekly" data-toggle="tab">周K</a></li>
+                                          <li><a href="#monthly" data-toggle="tab">月K</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                          <div class="tab-pane active" id="min">
+                                            <p><img src=<%=stockGifUrl.Min%> class="img-polaroid"></p>
+                                          </div>
+                                          <div class="tab-pane" id="daily">
+                                            <p><img src=<%=stockGifUrl.Daily%> class="img-polaroid"></p>
+                                          </div>
+                                          <div class="tab-pane" id="weekly">
+                                                <p><img src=<%=stockGifUrl.Weekly%> class="img-polaroid"></p>
+                                          </div>
+                                          <div class="tab-pane" id="monthly">
+                                                <p><img src=<%=stockGifUrl.Monthly%> class="img-polaroid"></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                             </div>
+                          </div>
+                     </div>
+
+
+        </div>
+
+</div>
