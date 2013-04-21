@@ -149,7 +149,7 @@ $(document).ready(function() {
         },
         "sScrollY":"400px",
         "sScrollX": "100%",
-        "sScrollXInner": "120%",
+        "sScrollXInner": "110%",
         "bScrollCollapse": true,
 
 
@@ -182,14 +182,16 @@ $(document).ready(function() {
 
     } );
 
-    var oSettings=oTable.fnSettings();
-    var LengthStart=oSettings._iDisplayLength.toString()+oSettings._iDisplayStart.toString();
 
     $('#stockdatatable_filter input').attr("placeholder","拼音/各列数据");
 
+    setInterval(function(){
+        $(".dataTables_scrollHeadInner").css('width','1059px');
+        $(".dataTables_scrollHeadInner").css('padding-right','17px');
+        $(".dataTables_scrollHeadInner table").css('width','1059px');
+    },100);
 
     setInterval(function(){
-
         var nowDate=new Date();
         var morBegDate=new Date();
         morBegDate.setHours(9,15,0);

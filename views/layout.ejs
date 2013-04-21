@@ -14,10 +14,21 @@
 </style>
 <script src='/javascripts/jquery-1.9.0.js'></script>
 <script src='/javascripts/bootstrap.js'></script>
+
 <script src='/javascripts/jquery.dataTables.js'></script>
 <script src='/javascripts/dataTables.scroller.js'></script>
 <script src='/javascripts/DT_bootstrap.js'></script>
 
+<script>
+
+  $(document).ready(function(){
+      var mySource = [{ id: 1, name: '000001'}, { id: 2, name: '000002'}, { id: 3, name: '000003'}];
+      $("#searchStock").typeahead({source:mySource,display: 'name',
+                                                          val: 'id',
+                                                          itemSelected: displayResult});
+  });
+
+</script>
 </head>
 <body>
        <div class="navbar navbar-fixed-top">
@@ -58,8 +69,8 @@
                         <div class="offset1 span3">
                             <form class="form-search pull-left">
                                 <div class="input-append">
-                                   <input  type="text" class="search-query" placeholder="Search">
-                                    <button type="submit" class="btn btn-primary"><i class="icon-search"></i></button>
+                                   <input  type="text" class="search-query" placeholder="代码/名称/拼音" id="searchStock" autocomplete="off">
+                                    <button type="submit" class="btn btn-primary"><i class="icon-search" ></i></button>
                                 </div>
                             </form>
                         </div>
@@ -86,6 +97,9 @@
     <%}%>
 
     <%- body %>
-
+    <hr>
+    <footer>
+        <p class="muted">&copy;Create By Zhangshuiyong</p>
+    </footer>
 </body>
 </html>

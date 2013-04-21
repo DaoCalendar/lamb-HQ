@@ -121,16 +121,20 @@ var stockRefresh=function(req,res){
 
     var  stock_data;
     var options={host:settings.stockDataHost,path:stockDataPath};
+    //超时处理
+    /*
+    var req=null,request_timeout=null;
+    request_timeout=setTimeout(function(){
+        request_timeout=null;
+        req.abort();
+        console.log("Request Timeout Error.");
+    },5000);
+    */
     var stockDataReq= http.get(options,function(stockDataRes){
-        console.log("Status:"+stockDataRes.statusCode);
         stockDataRes.setEncoding("binary");
         stockDataRes.on('data',function(data){       //先得到所有的stock_data，再处理stock_data，得有一个变量保存
             stock_data+=data;
-            console.log(data);
-        });
-
-        //100个股票数据拿到
-        stockDataRes.on('end',function(){
+        }).on('end',function(){
             var buf=new Buffer(stock_data,'binary');
             var stock_data_=iconv.decode(buf,'GBK');
 
@@ -175,11 +179,13 @@ var stockRefresh=function(req,res){
             res.write(allStockArrayString);
             res.end();
 
+        }).on('error',function(err){
+            return  console.log("Refresh Stocks Response_Error: Status="+stockDataRes.statusCode+" Detail: "+err.message);
         });
     });
     //100个股票请求结束
     stockDataReq.on("error",function(err){
-        console.log(err.message);
+       return console.log("Refresh Stocks Request_Error Status="+stockDataReq.statusCode+" Detail: "+err.message);
     });
 
 };
@@ -245,8 +251,6 @@ var stockDataTableServer=function(req,res){
         {
             return console.log("Find_All_DbStock_Error Detail:"+err.message);
         }
-
-
         var sLength=100;
         var i_hund=parseInt(stocks.length/sLength);
         var i_rest=stocks.length%sLength;
@@ -262,7 +266,7 @@ var stockDataTableServer=function(req,res){
 
             var iTotalRecords=allStockArray.length;
             var iTotalDisplayRecords=allStockArray.length;
-            console.log(iTotalRecords);
+
             var responseString='{"sEcho":'+sEcho+',"iTotalRecords":"'+iTotalRecords+'","iTotalDisplayRecords":"'+iTotalDisplayRecords+'","aaData":[';
             for(var i=startIndex;i<endIndex;++i)
             {
@@ -338,15 +342,11 @@ function GetChangingStockData(stockDataPath,stockArray){
     var options={host:settings.stockDataHost,path:stockDataPath};
     options.Connection="keep-alive";
     var stockDataReq= http.get(options,function(stockDataRes){
-        console.log("Status:"+stockDataRes.statusCode);
+
         stockDataRes.setEncoding("binary");
         stockDataRes.on('data',function(data){       //先得到所有的stock_data，再处理stock_data，得有一个变量保存
             stock_data+=data;
-            console.log(data);
-        });
-
-        //100个股票数据拿到
-        stockDataRes.on('end',function(){
+        }).on('end',function(){
             var buf=new Buffer(stock_data,'binary');
             var stock_data_=iconv.decode(buf,'GBK');
 
@@ -357,12 +357,14 @@ function GetChangingStockData(stockDataPath,stockArray){
                 stockArray[k].SliceAssignStockData(stockDataArray[k]);
             }
             ep.emit('got_stock100',stockArray);
+        }).on('error',function(err){
+           return console.log("Get_Stock100_Response_Error Status="+stockDataRes.statusCode+" Detail: "+err.message);
         });
+    });
 
-        //100个股票请求结束
-        stockDataReq.on("error",function(err){
-            console.log("Get_Stock100_Error Detail:"+err.message);
-        });
+    stockDataReq.on("error",function(err){
+
+        return console.log("Get_Stock100_Request_Error Status="+stockDataReq.statusCode+" Detail: "+err.message);
     });
 
 };
@@ -371,6 +373,11 @@ var dispalySingleStockPage=function(req,res){
     var stockNumber=req.params.number;
     var DbStock=mongoose.model('Stock');
     DbStock.findOne({number:stockNumber},function(err,dbStock){
+        if(err)
+        {
+            return console.err("Display SingleStock Find_Db_Error Detail:"+err.message);
+        }
+
         var newStock=new NetStock(stockNumber,dbStock.pinyin,dbStock.cname);
         var stockDataPath=settings.stockDataHostPathPart;
         stockDataPath+=newStock.num_prefix_+newStock.number_;
@@ -378,15 +385,11 @@ var dispalySingleStockPage=function(req,res){
         var options={host:settings.stockDataHost,path:stockDataPath};
         options.Connection="keep-alive";
         var stockDataReq= http.get(options,function(stockDataRes){
-            console.log("Status:"+stockDataRes.statusCode);
+
             stockDataRes.setEncoding("binary");
             stockDataRes.on('data',function(data){       //先得到所有的stock_data，再处理stock_data，得有一个变量保存
                 stock_data+=data;
-                console.log(data);
-            });
-
-            //1个股票数据拿到
-            stockDataRes.on('end',function(){
+            }).on('end',function(){
                 var buf=new Buffer(stock_data,'binary');
                 var stock_data_=iconv.decode(buf,'GBK');
                 newStock.SliceAssignStockData(stock_data_);
@@ -399,9 +402,14 @@ var dispalySingleStockPage=function(req,res){
                 var stockGifUrl_={'Min':minGifUrl,'Daily':dailyGifUrl,'Weekly':weeklyUrl,'Monthly':monthlyUrl};
 
                 res.render("singleStock",{stock:newStock,stockGifUrl:stockGifUrl_});
+            }).on('error',function(err){
+                return console.log("SingleStock_Request_Error Status="+stockDataRes.statusCode+" Detail: "+err.message);
             });
         });
 
+        stockDataReq.on("error",function(err){
+            return console.log("SingleStock_Request_Error Status="+stockDataReq.statusCode+" Detail: "+err.message);
+        });
     });
 
 };
