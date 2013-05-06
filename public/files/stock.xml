@@ -1,333 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>小羊司令部</title>
-<meta charset='utf-8' />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel='stylesheet' href='/stylesheets/bootstrap.css'>
-<link rel='stylesheet' href='/stylesheets/DT_bootstrap.css'>
-<style>
-      body {
-        padding-top: 150px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-
-</style>
-<script src='/javascripts/jquery-1.9.0.js'></script>
-<script src='/javascripts/bootstrap.js'></script>
-<script src='/javascripts/jquery.dataTables.js'></script>
-<script src='/javascripts/dataTables.scroller.js'></script>
-<script src='/javascripts/DT_bootstrap.js'></script>
-<script src='/javascripts/bootstrap-typeahead.js'></script>
-<script>
-    $(document).ready(function() {
-        /* Table initialisation*/
-
-        var oTable=$('#stockdatatable').dataTable( {
-            //"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>S>",
-            "sDom": "<'row'<'alert alert-success'r>t<'row'<'span6'i>S>",
-            "bProcessing":true,
-            "oLanguage": {
-                'sSearch':'搜索:',
-                "sLengthMenu": "展示 _MENU_ 股票/每页",
-                'sZeroRecords':"找不到所要的股票,抱歉！",
-                'sInfo':"目前是 _START_ 到 _END_ 共 _TOTAL_ 支股票",
-                'sEmptyInfo':"目前是 0 到 0 共 0 支股票",
-                'sInfoFiltered':"从 _MAX_ 支股票找到",
-                'oPaginate':{'sFirst':"首页",'sNext':"下一页",'sPrevious':"上一页",'sLast':"尾页"},
-                "sProcessing": "正在加载...",
-                "sLoadingRecords": " "
-            },
-            "sScrollY":"500px",
-            "sScrollX": "100%",
-            "sScrollXInner": "120%",
-            "bScrollCollapse": true,
-            "oScroller": {
-                    "rowHeight": 47
-            },
-
-            'bServerSide':true,
-            'sAjaxSource':"/stockOrIndex/dataTableServer/<%=classNumber%>",
-
-            "aoColumnDefs":[
-                {"bSortable":false,"aTargets":[0]},
-                //rowdata[14]为前缀
-                {"mRender":function(data,type,rowData){return "<a class="+rowData[14]+" href='/stockOrIndex?prefix="+rowData[14]+"&number="+data+"' style='font-size:15px'><strong>"+data+"</strong></a>";},"aTargets":[1]},
-                {"bSortable":false,"sWidth":"10%","mRender":function(data,type,rowData){return "<a class="+rowData[14]+" href='/stockOrIndex?prefix="+rowData[14]+"&number="+rowData[1]+"' style='font-size:15px'><strong>"+data+"</strong></a>";},"aTargets":[2]}, //名称第2行不能排序
-                {
-                    "mRender":function(data,type,rowData){
-                        if(rowData[3]>0)
-                        {
-                            return  "<p style='color:red;font-size:18px'><strong>"+(data==-1?"--":data)+"</strong></p>";
-                        }else if(rowData[3]==0)
-                        {
-                            return  "<p style='color: #000000;font-size:18px'><strong>"+(data==-1?"--":data)+"</strong></p>";
-                        }else
-                        {
-                            return  "<p style='color: lime;font-size:18px'><strong>"+(data==-1?"--":data)+"</strong></p>";
-                        }
-                    },"aTargets":[3,4,5,6,7,8,9,10,11,12,13]             //根据升幅来决定 这一行除代码 名称外的颜色
-                },
-
-                {"bVisible":false,"aTargets":[14,15]}
-            ]
-
-        } );
-
-                var optionalTable=$('#optionalStockdatatable').dataTable( {
-                    //"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>S>",
-                    "sDom": "<'row'<'alert alert-success'r>t<'row'<'span6'i>S>",
-                    "bProcessing":true,
-                    "oLanguage": {
-                        'sSearch':'搜索:',
-                        "sLengthMenu": "展示 _MENU_ 股票/每页",
-                        'sZeroRecords':"找不到所要的股票,抱歉！",
-                        'sInfo':"目前是 _START_ 到 _END_ 共 _TOTAL_ 支股票",
-                        'sEmptyInfo':"目前是 0 到 0 共 0 支股票",
-                        'sInfoFiltered':"从 _MAX_ 支股票找到",
-                        'oPaginate':{'sFirst':"首页",'sNext':"下一页",'sPrevious':"上一页",'sLast':"尾页"},
-                        "sProcessing": "正在加载...",
-                        "sLoadingRecords": " "
-                    },
-                    "sScrollY":"500px",
-                    "sScrollX": "100%",
-                    "sScrollXInner": "120%",
-                    "bScrollCollapse": true,
-                    "oScroller": {
-                            "rowHeight": 47
-                    },
-
-                    'bServerSide':true,
-                    'sAjaxSource':"/optionalStockOrIndex/dataTableServer",
-
-                    "aoColumnDefs":[
-                        {"bSortable":false,"aTargets":[0]},
-                        //rowdata[14]为前缀
-                        {"mRender":function(data,type,rowData){return "<a class="+rowData[9]+" href='/stockOrIndex?prefix="+rowData[9]+"&number="+data+"' style='font-size:15px'><strong>"+data+"</strong></a>";},"aTargets":[1]},
-                        {"bSortable":false,"mRender":function(data,type,rowData){return "<a class="+rowData[9]+" href='/stockOrIndex?prefix="+rowData[9]+"&number="+rowData[1]+"' style='font-size:15px'><strong>"+data+"</strong></a>";},"aTargets":[2]}, //名称第2行不能排序
-                        {
-                            "mRender":function(data,type,rowData){
-                                if(rowData[3]>0)
-                                {
-                                    return  "<p style='color:red;font-size:18px'><strong>"+(data==-1?"--":data)+"</strong></p>";
-                                }else if(rowData[3]==0)
-                                {
-                                    return  "<p style='color: #000000;font-size:18px'><strong>"+(data==-1?"--":data)+"</strong></p>";
-                                }else
-                                {
-                                    return  "<p style='color: lime;font-size:18px'><strong>"+(data==-1?"--":data)+"</strong></p>";
-                                }
-                            },"aTargets":[3,4,5,6,7,8]             //根据升幅来决定 这一行除代码 名称外的颜色
-                        },
-                        {"bVisible":false,"aTargets":[9]}
-
-                    ]
-
-                } );
-
-
-        $('.nav-tabs a').on('shown', function (e) {
-            var headWidth=$('#optionalStockdatatable_wrapper .dataTables_scrollHeadInner').css("width");
-            var headWidthPxIndex=headWidth.indexOf("px");
-            headWidth=headWidth.slice(0,headWidthPxIndex);
-            headWidth=parseInt(headWidth);
-            var bodyWidth= $("#optionalStockdatatable")[0].clientWidth;
-            if ( headWidth<bodyWidth) {
-                optionalTable.fnAdjustColumnSizing();
-            }
-            headWidth=$('#stockdatatable_wrapper .dataTables_scrollHeadInner').css("width");
-            var headWidthPxIndex=headWidth.indexOf("px");
-            headWidth=headWidth.slice(0,headWidthPxIndex);
-            headWidth=parseInt(headWidth);
-            bodyWidth= $("#stockdatatable")[0].clientWidth;
-            if ( headWidth<bodyWidth) {
-                oTable.fnAdjustColumnSizing();
-            }
-        });
-
-        setInterval(function(){
-            var nowDate=new Date();
-                        if(nowDate.getDay()!=6&&nowDate.getDay()!=0)
-                        {
-                            var morBegDate=new Date();
-                            morBegDate.setHours(9,15,0);
-
-                            var morEndDate=new Date();
-                            morEndDate.setHours(11,31,0);
-
-                            var noonBegDate=new Date();
-                            noonBegDate.setHours(12,59,0);
-
-                            var noonEndDate=new Date();
-                            noonEndDate.setHours(15,1,0);
-                            if(nowDate>=morBegDate&&nowDate<=morEndDate||nowDate>=noonBegDate&&nowDate<=noonEndDate)
-                            {
-                                    var oTable=$('#optionalStockdatatable').dataTable();
-                                    var oSettings=oTable.fnSettings();
-                                    var sortingCol_=oSettings.aaSorting[0][0];
-                                    var sortingDir_=oSettings.aaSorting[0][1];
-
-                                    var length=oTable.$('tr').length;
-                                    var stockOrIndex3ItemArray=[];
-                                    var trNodes=$('#optionalStockdatatable tbody tr');
-                                    for(var i=0;i<length;++i)
-                                    {
-                                        //代码
-                                        var number_=trNodes.eq(i).children('td').eq(1).text();
-                                        var cname_=trNodes.eq(i).children('td').eq(2).text();
-                                        var prefix_=trNodes.eq(i).children('td').eq(2).children('a').attr("class");
-                                        var stockOrIndex3Item={number:number_,cname:cname_,prefix:prefix_};
-                                        stockOrIndex3ItemArray.push(stockOrIndex3Item);
-                                    }
-                                    $.ajax({
-                                        url:"/optional/refresh",
-                                        data:{
-                                            sortingCol:sortingCol_,
-                                            sortingDir:sortingDir_,
-                                            stockOrIndex3Items:stockOrIndex3ItemArray
-                                        },
-                                        dataType:"json",
-                                        type:"post",
-                                        success:function(data){
-                                            var stockArray=data.currentRows;
-                                            //返回的stock数据都是有顺序的,也包含代码,名称,因为要动态刷新
-                                            if(stockArray.length!=0)
-                                            {
-                                                var rows=$("#optionalStockdatatable tbody tr");
-                                                rows.each(function(i){
-                                                    var cells=rows.eq(i).find("strong");
-                                                    //由于只有//代码//名称//涨幅//现价//涨跌 //买入//卖出//成交量/手//成交额/万//昨收
-                                                    //有strong,所以可以
-                                                    cells.each(function(j){
-                                                        cells.eq(j).text(stockArray[i][j]);
-                                                    });
-                                                    //再更新//代码，名称的href
-                                                    rows.eq(i).children('td').eq(1).children('a').attr("class",stockArray[i][8]).attr("href","/stockOrIndex?prefix="+stockArray[i][8]+"&number="+stockArray[i][0]);//前缀
-                                                    rows.eq(i).children('td').eq(2).children('a').attr("class",stockArray[i][8]).attr("href","/stockOrIndex?prefix="+stockArray[i][8]+"&number="+stockArray[i][0]);
-                                                     //填完数据,刷新颜色
-                                                     var color;
-                                                     //涨幅
-                                                     if(stockArray[i][2]>0)
-                                                     {
-                                                        color="red";
-                                                     }else if(stockArray[i][2]==0)
-                                                     {
-                                                        color="#000000";
-                                                     }else
-                                                     {
-                                                        color="lime";
-                                                     }
-                                                     //涨幅-最低有p段落名用于加style
-                                                     var pnodes=rows.eq(i).find("p");
-                                                     pnodes.each(function(i){
-                                                        pnodes.eq(i).css("color",color);
-                                                     });
-                                                });
-                                            }
-
-                                        },
-                                        error:function(){
-                                            //$('#refresh').removeClass('alert-success').addClass('alert-error').text('刷新股票数据出错,请重刷.');
-                                        }
-                                    });
-
-                            }
-                        }
-        },5200);
-
-        setInterval(function(){
-
-            var nowDate=new Date();
-            if(nowDate.getDay()!=6&&nowDate.getDay()!=0)
-            {
-                var morBegDate=new Date();
-                morBegDate.setHours(9,15,0);
-
-                var morEndDate=new Date();
-                morEndDate.setHours(11,31,0);
-
-                var noonBegDate=new Date();
-                noonBegDate.setHours(12,59,0);
-
-                var noonEndDate=new Date();
-                noonEndDate.setHours(15,1,0);
-                if(nowDate>=morBegDate&&nowDate<=morEndDate||nowDate>=noonBegDate&&nowDate<=noonEndDate)
-                {
-                    var oTable=$('#stockdatatable').dataTable();
-                    var oSettings=oTable.fnSettings();
-                    var sortingCol_=oSettings.aaSorting[0][0];
-                    var sortingDir_=oSettings.aaSorting[0][1];
-
-                    var length=oTable.$('tr').length;
-                    var stockOrIndex3ItemArray=[];
-                    var trNodes=$('#stockdatatable tbody tr');
-                    for(var i=0;i<length;++i)
-                    {
-                        //代码
-                        var number_=trNodes.eq(i).children('td').eq(1).text();
-                        var cname_=trNodes.eq(i).children('td').eq(2).text();
-                        var prefix_=trNodes.eq(i).children('td').eq(2).children('a').attr("class");
-                        var stockOrIndex3Item={number:number_,cname:cname_,prefix:prefix_};
-                        stockOrIndex3ItemArray.push(stockOrIndex3Item);
-                    }
-                    $.ajax({
-                        url:"/stock/refresh",
-                        data:{
-                            sortingCol:sortingCol_,
-                            sortingDir:sortingDir_,
-                            stockOrIndex3Items:stockOrIndex3ItemArray
-                        },
-                        dataType:"json",
-                        type:"post",
-                        success:function(data){
-                            var stockArray=data.currentRows;
-                                //返回的stock数据都是有顺序的,也包含代码,名称,因为要动态刷新
-
-                            var rows=$("#stockdatatable tbody tr");
-                            rows.each(function(i){
-                                var cells=rows.eq(i).find("strong");
-                                //由于只有//代码//名称//涨幅//现价//涨跌 //买入//卖出//成交量/手//成交额/万//今开//昨收//最高//最低
-                                //有strong,所以可以
-                                cells.each(function(j){
-                                    cells.eq(j).text(stockArray[i][j]);
-                                });
-                                //再更新//代码，名称的href
-                                rows.eq(i).children('td').eq(1).children('a').attr("class",stockArray[i][13]).attr("href","/stockOrIndex?prefix="+stockArray[i][13]+"&number="+stockArray[i][0]);//前缀
-                                rows.eq(i).children('td').eq(2).children('a').attr("class",stockArray[i][13]).attr("href","/stockOrIndex?prefix="+stockArray[i][13]+"&number="+stockArray[i][0]);
-                                 //填完数据,刷新颜色
-                                 var color;
-                                 //涨幅
-                                 if(stockArray[i][2]>0)
-                                 {
-                                    color="red";
-                                 }else if(stockArray[i][2]==0)
-                                 {
-                                    color="#000000";
-                                 }else
-                                 {
-                                    color="lime";
-                                 }
-                                 //涨幅-最低有p段落名用于加style
-                                 var pnodes=rows.eq(i).find("p");
-                                 pnodes.each(function(i){
-                                    pnodes.eq(i).css("color",color);
-                                 });
-                            });
-
-                        },
-                        error:function(){
-                            //$('#refresh').removeClass('alert-success').addClass('alert-error').text('刷新股票数据出错,请重刷.');
-                        }
-                    });
-
-                }
-            }
-        },5000);
-
-
-        $("#stockSearch").typeahead({
-
-            source:[
-
 
     "000998 sz 隆平高科 lpgk",
     "002041 sz 登海种业 dhzy",
@@ -348,7 +18,7 @@
     "002200 sz *ST大地 *stdd",
     "002679 sz 福建金森 fjjs",
     "600265 sh ST景谷 stjg",
-
+  
     "000735 sz 罗牛山 lns",
     "002234 sz 民和股份 mhgf",
     "002299 sz 圣农发展 snfz",
@@ -360,7 +30,7 @@
     "300313 sz 天山生物 tssw",
     "600965 sh 福成五丰 fcwf",
     "600975 sh 新五丰 xwf",
-
+   
     "000798 sz 中水渔业 zsyy",
     "002069 sz 獐子岛 zzd",
     "002086 sz 东方海洋 dfhy",
@@ -371,9 +41,9 @@
     "600097 sh 开创国际 kcgj",
     "600257 sh 大湖股份 dhgf",
     "600467 sh 好当家 hdj",
-
+  
     "000713 sz 丰乐种业 flzy",
-
+   
     "000552 sz 靖远煤电 jymd",
     "000571 sz 新大洲 xdz",
     "000780 sz 平庄能源 pzny",
@@ -401,7 +71,7 @@
     "601699 sh 潞安环能 lahn",
     "601898 sh 中煤能源 zmny",
     "601918 sh 国投新集 gtxj",
-
+ 
     "300157 sz 恒泰艾普 htap",
     "300164 sz 通源石油 tysy",
     "300191 sz 潜能恒信 qnhx",
@@ -409,7 +79,7 @@
     "600583 sh 海油工程 hygc",
     "601808 sh 中海油服 zhyf",
     "601857 sh 中国石油 zgsy",
-
+ 
     "000409 sz ST泰复 sttf",
     "000629 sz 攀钢钒钛 pgft",
     "000655 sz 金岭矿业 jlky",
@@ -417,7 +87,7 @@
     "600532 sh 宏达矿业 hdky",
     "600711 sh 盛屯矿业 sdky",
     "600882 sh 华联矿业 hlky",
-
+ 
     "000426 sz 兴业矿业 xyky",
     "000603 sz 盛达矿业 sdky",
     "000688 sz *ST朝华 stch",
@@ -436,13 +106,13 @@
     "601899 sh 紫金矿业 zjky",
     "601958 sh 金钼股份 jmgf",
     "603993 sh 洛阳钼业 lymy",
-
+ 
     "002207 sz 准油股份 hygf",
     "002554 sz 惠博普 hbp",
     "002629 sz 仁智油服 rzyf",
     "002683 sz 宏大爆破 hdbp",
     "300084 sz 海默科技 hmkj",
-
+   
     "000048 sz 康达尔 kde",
     "000529 sz 广弘控股 ghkg",
     "000639 sz 西王食品 xwsp",
@@ -480,7 +150,7 @@
     "600438 sh 通威股份 twgf",
     "600695 sh 大江股份 djgf",
     "600737 sh 中粮屯河 zlth",
-
+  
     "000716 sz 南方食品 nfsp",
     "002216 sz 三全食品 sqsp",
     "002329 sz 皇氏乳业 hsry",
@@ -503,7 +173,7 @@
     "600872 sh 中炬高新 zjgx",
     "600873 sh 梅花集团 mhjt",
     "600887 sh 伊利股份 ylgf",
-
+  
     "000019 sz 深深宝A ssba",
     "000557 sz *ST广夏 *stgx",
     "000568 sz 泸州老窖 lzlj",
@@ -539,7 +209,7 @@
     "600779 sh 水井坊 sjf",
     "600809 sh 山西汾酒 sxfj",
     "600962 sh 国投中鲁 gtzl",
-
+ 
     "000018 sz ST中冠 stzg",
     "000158 sz 常山股份 csgf",
     "000611 sz 四海股份 shgf",
@@ -615,14 +285,14 @@
     "600400 sh 红豆股份 hdgf",
     "601566 sh 九牧王 jmw",
     "601718 sh 际华集团 jhjt",
-
+  
     "002494 sz 华斯股份 hsgf",
     "002517 sz 泰亚股份 tygf",
     "002674 sz 兴业科技 xykj",
     "600439 sh 瑞贝卡 rbk",
     "600735 sh 新华锦 xhj",
     "603001 sh 奥康国际 akgj",
-
+   
     "000910 sz 大亚科技 dykj",
     "002043 sz 兔宝宝 tbb",
     "002240 sz 威华股份 whgf",
@@ -632,7 +302,7 @@
     "600189 sh 吉林森工 jlsg",
     "600321 sh 国栋建设 gdjs",
     "601996 sh 丰林集团 fljt",
-
+  
     "002174 sz 梅花伞 mhs",
     "002489 sz 浙江永强 zjyq",
     "002572 sz 索菲亚 sfy",
@@ -668,7 +338,7 @@
     "600793 sh ST宜纸 styz",
     "600963 sh 岳阳林纸 yylz",
     "600966 sh 博汇纸业 bhzy",
-
+ 
     "000812 sz 陕西金叶 sxjy",
     "002117 sz 东港股份 dggf",
     "002191 sz 劲嘉股份 jjgf",
@@ -687,7 +357,7 @@
     "002678 sz 珠江钢琴 zjgq",
     "300043 sz 星辉车模 xhcm",
     "300329 sz 海伦钢琴 hlgq",
-
+  
     "000059 sz 辽通化工 lthg",
     "000637 sz 茂化实华 mhsy",
     "000698 sz 沈阳化工 syhg",
@@ -706,7 +376,7 @@
     "600792 sh 云煤能源 ymny",
     "600997 sh 开滦股份 klgf",
     "601011 sh 宝泰隆 btl",
-
+ 
     "000155 sz *ST川化 *stch",
     "000407 sz 胜利股份 slgf",
     "000422 sz 湖北宜化 hbyh",
@@ -878,7 +548,7 @@
     "603002 sh 宏昌电子 hcdz",
     "603077 sh 和邦股份 hbgf",
     "900951 sh 大化B股 dhbg",
-
+   
     "000004 sz 国农科技 gnkj",
     "000153 sz 丰原药业 fyyy",
     "000403 sz ST生化 stsh",
@@ -1021,7 +691,7 @@
     "600829 sh 三精制药 sjzy",
     "600867 sh 通化东宝 thdb",
     "600976 sh 武汉健民 whjm",
-
+ 
     "000420 sz *ST吉纤 *stjx",
     "000584 sz 友利控股 ylkg",
     "000615 sz 湖北金环 hbjh",
@@ -1100,7 +770,7 @@
     "600579 sh *ST黄海 *sthh",
     "600623 sh 双钱股份 sqgf",
     "601058 sh 赛轮股份 slgf",
-
+   
     "000012 sz 南玻A nba",
     "000023 sz 深天地 std",
     "000401 sz 冀东水泥 jdsy",
@@ -1172,7 +842,7 @@
     "601012 sh 隆基股份 ljgf",
     "601636 sh 旗滨集团 qbjt",
     "601992 sh 金隅股份 jygf",
-
+ 
     "000708 sz 大冶特钢 dytg",
     "000709 sz 河北钢铁 hbgt",
     "000717 sz *ST韶钢 *stsg",
@@ -1205,7 +875,7 @@
     "600808 sh 马钢股份 mggf",
     "601003 sh 柳钢股份 lggf",
     "601005 sh 重庆钢铁 cqgt",
-
+        
     "000060 sz 中金岭南 zjln",
     "000612 sz 焦作万方 jzwf",
     "000630 sz 铜陵有色 tlys",
@@ -1257,7 +927,7 @@
     "601600 sh 中国铝业 zgly",
     "601677 sh 明泰铝业 mtly",
     "603399 sh 新华龙 xhl",
-
+   
     "000039 sz 中集集团 zjjt",
     "000055 sz 方大集团 fdjt",
     "000778 sz 新兴铸管 xxzg",
@@ -1300,7 +970,7 @@
     "600992 sh 贵绳股份 gsgf",
     "601028 sh 玉龙股份 blgf",
     "601700 sh 风范股份 ffgf",
-
+   
     "000404 sz 华意压缩 hyys",
     "000410 sz 沈阳机床 syjc",
     "000519 sz 江南红箭 jnhj",
@@ -1401,7 +1071,7 @@
     "601313 sh 江南嘉捷 jnjj",
     "601558 sh 华锐风电 hrfd",
     "601727 sh 上海电气 shdq",
-
+ 
     "000010 sz SST华新 ssthx",
     "000157 sz 中联重科 zlzk",
     "000425 sz 徐工机械 xgjx",
@@ -1530,7 +1200,7 @@
     "601717 sh 郑煤机 zmj",
     "601798 sh 蓝科高新 lkgx",
     "601908 sh 京运通 jyt",
-
+   
     "000338 sz 潍柴动力 wcdl",
     "000550 sz 江铃汽车 jlqc",
     "000559 sz 万向钱潮 wxqc",
@@ -1608,7 +1278,7 @@
     "601965 sh 中国汽研 zgqy",
     "900953 sh 凯马B kmb",
     "900956 sh 东贝B股 dbbg",
-
+ 
     "000017 sz *ST中华 *stzh",
     "000738 sz 中航动控 zhdk",
     "000768 sz 中航飞机 zhfj",
@@ -2109,14 +1779,14 @@
     "601991 sh 大唐发电 dtfd",
     "900948 sh 伊泰B股 ytbg",
     "900949 sh 东电B股 ddbg",
-
+  
     "000669 sz 领先科技 lxkj",
     "002267 sz 陕天然气 strq",
     "002700 sz 新疆浩源 xjhy",
     "600635 sh 大众公用 dzgy",
     "600642 sh 申能股份 sngf",
     "601139 sh 深圳燃气 szrq",
-
+  
     "000544 sz 中原环保 zyhb",
     "000598 sz 兴蓉投资 xrtz",
     "000685 sz 中山公用 zsgy",
@@ -2131,7 +1801,7 @@
     "601158 sh 重庆水务 cqsw",
     "601199 sh 江南水务 jnsw",
     "900935 sh 阳晨B股 ycbg",
-
+    
     "000065 sz 北方国际 bfgj",
     "000090 sz 深天健 stj",
     "000498 sz *ST路桥 *stlq",
@@ -2179,7 +1849,7 @@
     "601800 sh 中国交建 zgjj",
 
     "000931 sz 中关村 zgc",
-
+  
     "002081 sz 金螳螂 jtl",
     "002163 sz 中航三鑫 zhsx",
     "002314 sz 雅致股份 yzgf",
@@ -2195,7 +1865,7 @@
     "600681 sh 万鸿集团 whjt",
     "601886 sh 江河幕墙 jhmq",
     "900939 sh 汇丽B hlb",
-
+ 
     "000025 sz 深特力 stl",
     "000028 sz 国药一致 gyyz",
     "000045 sz 深纺织 sfz",
@@ -2577,7 +2247,7 @@
     "600845 sh 宝信软件 bxrj",
     "600850 sh 华东电脑 hddn",
     "601519 sh 大智慧 dzh",
-
+   
     "000001 sz 平安银行 payh",
     "002142 sz 宁波银行 nbyh",
     "600000 sh 浦发银行 pfyh",
@@ -2594,7 +2264,7 @@
     "601939 sh 建设银行 jsyh",
     "601988 sh 中国银行 zgyh",
     "601998 sh 中信银行 zxyh",
-
+   
     "000562 sz 宏源证券 hyzq",
     "000686 sz 东北证券 dbzq",
     "000728 sz 国元证券 gyzq",
@@ -2614,17 +2284,17 @@
     "601688 sh 华泰证券 htzq",
     "601788 sh 光大证券 gdzq",
     "601901 sh 方正证券 fzzq",
-
+  
     "601318 sh 中国平安 zgpa",
     "601336 sh 新华保险 xhbx",
     "601601 sh 中国太保 zgtb",
     "601628 sh 中国人寿 zgrs",
-
+   
     "000563 sz 陕国投 sgt",
     "600643 sh 爱建股份 ajgf",
     "600705 sh 中航投资 zhtz",
     "600816 sh 安信信托 axxt",
-
+    
     "000002 sz 深万科 swk",
     "000005 sz 世纪星源 sjxy",
     "000006 sz 深振业 szy",
@@ -2768,9 +2438,9 @@
     "601588 sh 北辰实业 bcsy",
     "900950 sh 新城B股 xcbg",
     "900957 sh 凌云B股 lybg",
-
+    
     "000415 sz 渤海租赁 bhzl",
-
+   
     "000058 sz 深赛格 ssg",
     "000061 sz 农产品 ncp",
     "000062 sz 深圳华强 szhq",
@@ -2792,10 +2462,10 @@
     "600790 sh 轻纺城 qfc",
     "601888 sh 中国国旅 zggl",
     "900929 sh 锦旅B股 jlbg",
-
+    
     "300347 sz 泰格医药 tgyy",
     "600645 sh 中源协和 zyxh",
-
+   
     "002116 sz 中国海诚 zghc",
     "002178 sz 延华智能 yhzn",
     "002398 sz 建研集团 jyjt",
@@ -2814,7 +2484,7 @@
     "300172 sz 中电环保 zdhb",
     "300187 sz 永清环保 yqhb",
     "300190 sz 维尔利 wel",
-
+  
     "000069 sz 华侨城 hqc",
     "000430 sz 张家界 zjj",
     "000610 sz 西安旅游 xaly",
@@ -2832,13 +2502,13 @@
     "600706 sh 曲江文旅 qjwl",
     "600749 sh 西藏旅游 xzly",
     "600832 sh 东方明珠 dfmz",
-
+  
     "600661 sh 新南洋 xny",
-
+    
     "300015 sz 爱尔眼科 aeyk",
     "300244 sz 迪安诊断 dazd",
     "600763 sh 通策医疗 tcyl",
-
+   
     "000504 sz ST传媒 stcm",
     "000719 sz 大地传媒 ddcm",
     "000793 sz 华闻传媒 hwcm",
@@ -2853,7 +2523,7 @@
     "601801 sh 皖新传媒 wxcm",
     "601928 sh 凤凰传媒 fhcm",
     "601999 sh 出版传媒 cbcm",
-
+ 
     "000156 sz 华数传媒 hscm",
     "000665 sz 湖北广电 hbgd",
     "300027 sz 华谊兄弟 hyxd",
@@ -2862,9 +2532,9 @@
     "300291 sz 华录百纳 hlbn",
     "300336 sz 新文化 xwh",
     "600088 sh 中视传媒 zscm",
-
+ 
     "002699 sz 美盛文化 mswh",
-
+   
     "000009 sz 中国宝安 zgba",
     "000034 sz 深信泰丰 sxtf",
     "000421 sz 南京中北 njzb",
@@ -2913,106 +2583,3 @@
     "399333 s_sz 中小板R sxbr",
     "399606 s_sz 创业板R cybr"
 
-            ],
-            highlighter: function(item){
-
-                var itemArray=item.split(" ");
-                var realItem=[];
-                itemArray.forEach(function(item){
-                    if(item!="")
-                    {
-                        realItem.push(item);
-                    }
-                });
-                var itemString="<a href='/stockOrIndex/?prefix="+realItem[1]+"&number="+realItem[0]+"' style='text-decoration:none;font-size:18px'>"+"<strong>"+realItem[0]+"&nbsp;&nbsp;&nbsp;&nbsp;"+realItem[1]+"&nbsp;&nbsp;&nbsp;&nbsp;"+realItem[2]+"</strong></a>";
-                return itemString;
-            },
-            items:10
-        });
-
-
-
-    } );
-
-</script>
-</head>
-<body>
- <div class="contain-fluid">
-    <div class="row-fluid">
-       <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-               <div class="container-fluid">
-                    <div class="row-fluid">
-                        <div class="offset1 span4">
-                            <a class="brand" href="#">
-                                <image src="../public/images/default.jpg"></image>
-                                <strong>小羊司令部</strong>
-                            </a>
-                            <ul class="nav">
-                                <li><a href="/">首页</a></li>
-                                <li><a>关于</a></li>
-                                <li><a>联系我们</a></li>
-                            </ul>
-                        </div>
-
-                            <%if(!user){ %>
-                            <form id="unloginForm" class="navbar-form pull-right" action="/login" method="post">
-                                <input type="text" placeholder="用户名/邮箱" name="username">
-                                <input type="password" placeholder="密码" name="password">
-                                <button class="btn btn-primary" type="submit">登陆</button>
-                                <a class="btn btn-success" href="/register">注册</a>
-                            </form>
-                            <%}else{%>
-                                <form id="loginForm" class="navbar-form pull-right">
-                                    <span><%=user.name%>, 欢迎进入司令部!</span>
-                                    <a href="/logout" class="btn btn-primary">登出</a>
-                                </form>
-                            <%}%>
-
-                    </div>
-                    <div class="row-fluid" style="padding-top:30px">
-
-                    </div>
-                    <div class="row-fluid">
-                        <div class="offset1 span3">
-                            <form class="form-search pull-left">
-                                <div class="input-append">
-                                   <input  type="text" id="stockSearch" placeholder="代码/拼音/名称" >
-                                    <button type="submit" class="btn btn-primary"><i class="icon-search" ></i></button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="offset7">
-                            <blockquote>
-                                <p>别人恐惧的时候贪婪,别人贪婪的时候恐惧.</p>
-                                <small>沃伦巴菲特</small>
-                            </blockquote>
-                        </div>
-                    </div>
-               </div>
-            </div>
-      </div>
-    </div>
-    <div class="row-fluid">
-        <%if(success!=''){%>
-        <div class="alert alert-success">
-            <p><%=success%></p>
-        </div>
-        <%}%>
-        <%if(error!=''){%>
-        <div class="alert alert-error">
-            <p><%=error%></p>
-        </div>
-        <%}%>
-    </div>
-    <div class="row-fluid">
-        <%- body %>
-    <div>
-    <div class="row-fluid">
-        <hr>
-        <footer>
-            <p class="muted">&copy;Create By Zhangshuiyong</p>
-        </footer>
-    </div>
-</body>
-</html>

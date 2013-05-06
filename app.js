@@ -44,12 +44,10 @@ app.configure(function(){
 
   app.use(flash());
   app.use(function(req,res,next){
-        res.locals.sEcho=req.query.sEcho;
-        res.locals.iTotalRecords=undefined;
-        res.locals.iTotalDisplayRecords=undefined;
         res.locals.user=req.session.user;
         res.locals.error=req.flash("error");
         res.locals.success=req.flash("success");
+
         next();
     });
 

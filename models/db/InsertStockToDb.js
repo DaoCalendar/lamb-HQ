@@ -38,11 +38,12 @@ function InserteStockToDb(ep)
                             {
                                 var newStock=new Stock({
                                     number:stock.number,
+                                    prefix:stock.prefix,
                                     cname:stock.cname,
                                     pinyin:stock.pinyin,
                                     class1:stock.class1,
-                                    class2:stock.class2
-
+                                    class2:stock.class2,
+                                    optional:false
                                 });
 
                                 newStock.save(function(err,s_stock){

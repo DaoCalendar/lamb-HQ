@@ -1,0 +1,302 @@
+ <script>
+              setInterval(function(){
+                                            var nowDate=new Date();
+                                            if(nowDate.getDay()!=6&&nowDate.getDay()!=0)
+                                            {
+                                                var morBegDate=new Date();
+                                                morBegDate.setHours(9,15,0);
+
+                                                var morEndDate=new Date();
+                                                morEndDate.setHours(11,31,0);
+
+                                                var noonBegDate=new Date();
+                                                noonBegDate.setHours(12,59,0);
+
+                                                var noonEndDate=new Date();
+                                                noonEndDate.setHours(15,1,0);
+                                                if(nowDate>=morBegDate&&nowDate<=morEndDate||nowDate>=noonBegDate&&nowDate<=noonEndDate)
+                                                {
+                                                     var number="<%=index.number_%>";
+                                                     var prefix="<%=index.num_prefix_%>";
+                                                     var cname="<%=index.cname_%>";
+                                                     $.ajax({
+                                                             url:"/single/refresh",
+                                                             data:{
+                                                                number:number,
+                                                                prefix:prefix,
+                                                                cname:cname
+                                                             },
+                                                             dataType:"json",
+                                                             type:"post",
+                                                             success:function(data){
+                                                                        $("#cname").text(data.cname);
+                                                                        $("#number").text(data.number);
+                                                                        $("#nowPrice").text(data.nowPrice);
+                                                                        $("#riseValue").text(data.riseValue);
+                                                                        $("#riseRate").text(data.riseRate+"%");
+                                                                        $("#bargainAmount").text(data.bargainAmount);
+                                                                        $("#ydayEndPrice").text(data.ydayEndPrice);
+                                                                        $("#bargainValue").text(data.bargainValue);
+                                                                        //颜色更新
+                                                                        if(data.riseValue>0)
+                                                                        {
+                                                                            $("style").eq(1).text(".stockDataStyle{color:red;}");
+                                                                        }else if(data.riseValue==0){
+                                                                            $("style").eq(1).text(".stockDataStyle{color:#000000;}");
+                                                                        }else
+                                                                        {
+                                                                             $("style").eq(1).text(".stockDataStyle{color:lime;}");
+                                                                        }
+                                                                    },
+                                                             error:function(){}
+                                                     });
+                                                }
+                                            }
+              },5000);
+
+                    setInterval(function(){
+                                            var nowDate=new Date();
+                                            if(nowDate.getDay()!=6&&nowDate.getDay()!=0)
+                                            {
+                                                var morBegDate=new Date();
+                                                morBegDate.setHours(9,15,0);
+
+                                                var morEndDate=new Date();
+                                                morEndDate.setHours(11,31,0);
+
+                                                var noonBegDate=new Date();
+                                                noonBegDate.setHours(12,59,0);
+
+                                                var noonEndDate=new Date();
+                                                noonEndDate.setHours(15,1,0);
+                                                if(nowDate>=morBegDate&&nowDate<=morEndDate||nowDate>=noonBegDate&&nowDate<=noonEndDate)
+                                                {
+                                                      var dataImageNodes=$(".img-polaroid");
+                                                      dataImageNodes.eq(0).attr("src","<%=indexGifUrl.Min%>");
+                                                      dataImageNodes.eq(1).attr("src","<%=indexGifUrl.Daily%>");
+                                                      dataImageNodes.eq(2).attr("src","<%=indexGifUrl.Weekly%>");
+                                                      dataImageNodes.eq(3).attr("src","<%=indexGifUrl.Monthly%>");
+                                                }
+                                            }
+                    },5100);
+
+                    setInterval(function(){
+                            var nowDate=new Date();
+                            if(nowDate.getDay()!=6&&nowDate.getDay()!=0)
+                            {
+                                var morBegDate=new Date();
+                                morBegDate.setHours(9,15,0);
+
+                                var morEndDate=new Date();
+                                morEndDate.setHours(11,31,0);
+
+                                var noonBegDate=new Date();
+                                noonBegDate.setHours(12,59,0);
+
+                                var noonEndDate=new Date();
+                                noonEndDate.setHours(15,1,0);
+                                if(nowDate>=morBegDate&&nowDate<=morEndDate||nowDate>=noonBegDate&&nowDate<=noonEndDate)
+                                {
+                                      var postRecentStockOrIndexArray=[];
+                                      var recentStockOrIndex;
+                                      <%for(var i=recentStockOrIndexArray.length-1;i>=0;--i){%>
+                                           recentStockOrIndex={cname:"<%=recentStockOrIndexArray[i].cname_%>",
+                                                                number:"<%=recentStockOrIndexArray[i].number_%>",
+                                                                prefix:"<%=recentStockOrIndexArray[i].num_prefix_%>"
+                                                              };
+                                           postRecentStockOrIndexArray.push(recentStockOrIndex);
+                                      <%}%>
+                                      $.ajax({
+                                              url:"/recentStockOrIndex/refresh",
+                                              data:{
+                                                  postRecentStockOrIndexArray:postRecentStockOrIndexArray
+                                              },
+                                              dataType:"json",
+                                              type:"post",
+                                              success:function(data){
+                                                         var recentStockOrIndexArray=data.recentStockOrIndexArray;
+                                                         var recentCnameNodes=$(".recentCname");
+                                                         var recentColorNodes=$(".recentColor");
+                                                         var recentNowPriceNodes=$(".recentNowPrice");
+                                                         var recentRiseRateNodes=$(".recentRiseRate");
+                                                         for(var i=0;i<recentStockOrIndexArray.length;++i)
+                                                         {
+                                                             recentCnameNodes.eq(i).text(recentStockOrIndexArray[i].cname).attr("href","/stockOrIndex?prefix="+recentStockOrIndexArray[i].prefix+"&number="+recentStockOrIndexArray[i].number);
+                                                             var color;
+                                                             if(recentStockOrIndexArray[i].riseRate>0){
+                                                                 color="red";
+                                                             }else if(recentStockOrIndexArray[i].riseRate==0){
+                                                                 color:"#000000";
+                                                             }else{
+                                                                 color:"lime";
+                                                             }
+                                                             recentColorNodes.eq(i).css("color",color);
+                                                             recentNowPriceNodes.eq(i).text(recentStockOrIndexArray[i].nowPrice+" ");
+                                                             recentRiseRateNodes.eq(i).text(recentStockOrIndexArray[i].riseRate+"%");
+                                                         }
+                                                     },
+                                              error:function(){}
+                                      });
+                                }
+                            }
+                    },5200);
+
+        function clickOptionalButton(){
+            if($("#unloginForm").length){
+                  $("#unloginAlert").css("display","");
+            }else{
+                   var number=$("#number").text();
+                   var optionalButton=$("#optionalButton");
+                   var optionalAction_;
+                   if(optionalButton.children("i").hasClass("icon-plus"))
+                   {
+                       optionalAction_=1;
+                   }else
+                   {
+                       optionalAction_=0;
+                   }
+                   $.ajax({
+                       url:"/optional",
+                       type:"post",
+                       dataType:"json",
+                       data:{optionalAction:optionalAction_,optionalNumber:number,prefix:"<%=index.num_prefix_%>"},
+                       success:function(optionalData){
+                           if(optionalData.success)
+                           {
+                               if(optionalAction_)
+                               {
+                                   optionalButton.children('i').removeClass("icon-plus").addClass("icon-minus");
+                                   optionalButton.children('span').text("取消自选");
+                               }else
+                               {
+                                   optionalButton.children('i').removeClass("icon-minus").addClass("icon-plus");
+                                   optionalButton.children('span').text("加入自选");
+                               }
+                           }
+                       },
+                       error:function(){
+                           alert("由于网络原因,加入自选失败,请重试！");
+                       }
+                   });
+            }
+        }
+
+    </script>
+    <style>
+        <%if(index.rise_rate_>0){%>
+            .indexDataStyle{
+                 color:red;
+            }
+        <%}else if(index.rise_rate_==0){%>
+            .indexDataStyle{
+                color:#000000;
+        }
+        <%}else{%>
+            .indexDataStyle{
+                color:lime;
+            }
+        <%}%>
+    </style>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                <div class="well tabbable">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#1" data-toggle="tab">最近访问</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="1">
+                        <%for(var i=recentStockOrIndexArray.length-1;i>=0;--i){%>
+                          <p>
+                              <span><a href="/stockOrIndex?prefix=<%=recentStockOrIndexArray[i].num_prefix_%>&number=<%=recentStockOrIndexArray[i].number_%>"><%=recentStockOrIndexArray[i].cname_%></a>&nbsp;<span>
+                              <%if(recentStockOrIndexArray[i].rise_rate_>0){%>
+                                    <span style="color:red">
+                              <%}else if(recentStockOrIndexArray[i].rise_rate_==0){%>
+                                    <span style="color:#000000">
+                              <%}else{%>
+                                    <span style="color:lime">
+                              <%}%>
+                              <%=recentStockOrIndexArray[i].now_price_%>&nbsp;<%=recentStockOrIndexArray[i].rise_rate_%>%</span>
+                           </p>
+                        <%}%>
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="offset1 span9">
+
+                          <div class="row-fluid">
+                                <div class="span6">
+                                     <p>
+                                        <strong id="cname" style="font-size:30px"><%=index.cname_%></strong>
+                                        <span>(&nbsp;<span id="number"><%=index.number_%></span>&nbsp;)</span>
+                                     </p>
+                                </div>
+                                <div class="span6">
+
+                                    <button class="btn btn-primary" onclick="clickOptionalButton()" id="optionalButton">
+                                       <%if(!optional){%>
+                                            <i class="icon-plus"></i>
+                                            <span>加入自选</span>
+                                       <%}else{%>
+                                            <i class="icon-minus"></i>
+                                            <span>取消自选</span>
+                                       <%}%>
+                                    </button>
+                                </div>
+                          </div>
+
+                                                    <div class="row-fluid">
+                                                          <div class="span12">
+                                                               <strong id="nowPrice" class="indexDataStyle" style="font-size:20px"><%=index.now_price_%></strong>
+                                                               <span id="riseRate" class="indexDataStyle" style="margin-left:20px" id="riseRate"><%=index.rise_rate_%>%</span>
+                                                          </div>
+                                                    </div>
+                                                    <div class="row-fluid">
+                                                         <div class="span6">
+                                                              涨跌：<span id="riseValue" class="indexDataStyle"><%=index.rise_value_%></span>
+                                                         </div>
+                                                         <div class="span6">
+                                                              成交量：<span id="bargainAmount" class="indexDataStyle"><%=index.bargain_amount_%></span>
+                                                         </div>
+                                                    </div>
+                                                    <div class="row-fluid">
+                                                         <div class="span6">
+                                                               昨收：<span id="ydayEndPrice" class="indexDataStyle"><%=index.yday_end_price_%></span>
+                                                         </div>
+                                                         <div class="span6">
+                                                               成交额：<span id="bargainValue" class="indexDataStyle"><%=index.bargain_value_%></span>
+                                                         </div>
+                                                    </div>
+
+                                                    <div class="row-fluid">
+                                                        <div class="span12">
+                                                                <div class="tabbable">
+                                                                  <ul class="nav nav-tabs">
+                                                                    <li class="active"><a href="#min" data-toggle="tab">分钟</a></li>
+                                                                    <li><a href="#daily" data-toggle="tab">日K</a></li>
+                                                                    <li><a href="#weekly" data-toggle="tab">周K</a></li>
+                                                                    <li><a href="#monthly" data-toggle="tab">月K</a></li>
+                                                                  </ul>
+                                                                  <div class="tab-content">
+                                                                    <div class="tab-pane active" id="min">
+                                                                      <p><img src=<%=indexGifUrl.Min%> class="img-polaroid"></p>
+                                                                    </div>
+                                                                    <div class="tab-pane" id="daily">
+                                                                      <p><img src=<%=indexGifUrl.Daily%> class="img-polaroid"></p>
+                                                                    </div>
+                                                                    <div class="tab-pane" id="weekly">
+                                                                          <p><img src=<%=indexGifUrl.Weekly%> class="img-polaroid"></p>
+                                                                    </div>
+                                                                    <div class="tab-pane" id="monthly">
+                                                                          <p><img src=<%=indexGifUrl.Monthly%> class="img-polaroid"></p>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                       </div>
+                                                    </div>
+            </div>
+        </div>
+    </div>

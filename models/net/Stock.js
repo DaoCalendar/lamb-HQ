@@ -56,12 +56,13 @@ Stock.prototype.IsShangHaiStock=function(stock_number){
     return false;
 };
 
-Stock.prototype.SliceAssignStockData=function(dataString){
+Stock.prototype.SliceAssignData=function(dataString){
         var beg=dataString.indexOf("\"")+1;
         var end=dataString.lastIndexOf("\"");
         var stock_data_part=dataString.substring(beg,end);
         var stock_data_array=stock_data_part.split(",");
 
+        this.cname_=stock_data_array[0];
         this.today_first_price_=(stock_data_array[1]==undefined?0.00:stock_data_array[1]);
         this.yday_end_price_=(stock_data_array[2]==undefined?-1:stock_data_array[2]);  //做“--”展示
         this.now_price_=(stock_data_array[3]==undefined?-1:stock_data_array[3]);   //做“--”展示

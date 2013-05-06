@@ -14,10 +14,12 @@ var ObjectId=Schema.ObjectId;
 //股票对象模型
 var Stock=new Schema({
     number:String,
+    prefix:String,
     cname:String,
     pinyin:String,
     class1:String,
-    class2:String
+    class2:String,
+    optional:Boolean
 });
 
 //用户对象模型
